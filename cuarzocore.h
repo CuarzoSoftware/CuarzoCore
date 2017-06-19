@@ -12,6 +12,9 @@ public:
     ~CuarzoCore();
 
     void startUI();
+
+public slots:
+    void resolutionChanged();
 };
 
 #endif // CUARZOCORE_H

@@ -5,7 +5,8 @@
 CuarzoCore::CuarzoCore()
 {
     //Usar pantalla completa
-    setGeometry(QApplication::desktop()->geometry());
+    connect(QApplication::desktop(),SIGNAL(resized(int)),this,SLOT(resolutionChanged()));
+    resolutionChanged();
 
     //Escala correctamente el wallpaper
     setScaledContents(true);
@@ -33,12 +34,15 @@ CuarzoCore::~CuarzoCore()
 void CuarzoCore::startUI()
 {
 
-    //Asigna la resuloion
-    //QProcess::startDetached("sudo xrandr -s 1440x900");
-
     //Inicia Compton ( Display Manager )
     QProcess::startDetached("compton -CG");
 
     //Inicia Crystals ( Window Manager )
     QProcess::startDetached(QApplication::applicationDirPath() + "/../CR/Crystals");
+}
+
+void CuarzoCore::resolutionChanged()
+{
+    //Usar pantalla completa
+    setGeometry(QApplication::desktop()->geometry());
 }
