@@ -15,6 +15,9 @@ CuarzoCore::CuarzoCore()
 
     //Muestra el fondo en pantalla ( Podriamos añadir una animación más adelante )
     show();
+
+    //Inicia los componentes
+    startUI();
 }
 
 
@@ -30,7 +33,12 @@ CuarzoCore::~CuarzoCore()
 void CuarzoCore::startUI()
 {
 
-    //Inicia Crystals ( Window Manager )
-    QProcess::startDetached("startx /usr/bin/./Crystals")
+    //Asigna la resuloion
+    //QProcess::startDetached("sudo xrandr -s 1440x900");
 
+    //Inicia Compton ( Display Manager )
+    QProcess::startDetached("compton -CG");
+
+    //Inicia Crystals ( Window Manager )
+    QProcess::startDetached(QApplication::applicationDirPath() + "/../CR/Crystals");
 }
