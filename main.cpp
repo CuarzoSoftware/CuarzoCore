@@ -1,10 +1,10 @@
-#include "cuarzocore.h"
+#include "sio4.h"
 #include "includes.h"
 
 int main(int argc, char *argv[])
 {
 
-    /* CUARZO CORE */
+    /* SiO4 */
 
     /* Encargado de conectar todas las aplicaciones del sistema, a través de sockets.
      * Muestra el fondo de escritorio.
@@ -22,6 +22,6 @@ int main(int argc, char *argv[])
     */
 
     QApplication a(argc, argv);
-    CuarzoCore core;
+    SiO4 core;
     return a.exec();
 }

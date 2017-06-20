@@ -1,8 +1,8 @@
-#include "cuarzocore.h"
+#include "sio4.h"
 
 //Constructor
 
-CuarzoCore::CuarzoCore()
+SiO4::SiO4()
 {
     //Usar pantalla completa
     connect(QApplication::desktop(),SIGNAL(resized(int)),this,SLOT(resolutionChanged()));
@@ -24,24 +24,24 @@ CuarzoCore::CuarzoCore()
 
 //Destructor
 
-CuarzoCore::~CuarzoCore()
+SiO4::~SiO4()
 {
 
 }
 
 //Inicia los demás componentes gráficos
 
-void CuarzoCore::startUI()
+void SiO4::startUI()
 {
 
     //Inicia Compton ( Display Manager )
     QProcess::startDetached("compton -CG");
 
     //Inicia Crystals ( Window Manager )
-    QProcess::startDetached(QApplication::applicationDirPath() + "/../CR/Crystals");
+    QProcess::startDetached(QApplication::applicationDirPath() + "/../Crystals/Crystals");
 }
 
-void CuarzoCore::resolutionChanged()
+void SiO4::resolutionChanged()
 {
     //Usar pantalla completa
     setGeometry(QApplication::desktop()->geometry());

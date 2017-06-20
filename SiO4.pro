@@ -8,16 +8,16 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = CuarzoCore
+TARGET = SiO4
 TEMPLATE = app
 
 SOURCES += \
         main.cpp \
-        cuarzocore.cpp
+    sio4.cpp
 
 HEADERS += \
-        cuarzocore.h \
-    includes.h
+    includes.h \
+    sio4.h
 
 RESOURCES += \
     resources.qrc
