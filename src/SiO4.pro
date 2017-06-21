@@ -12,7 +12,7 @@ TARGET = SiO4
 TEMPLATE = app
 
 SOURCES += \
-        main.cpp \
+    main.cpp \
     sio4.cpp \
     includes.cpp \
     socket.cpp
