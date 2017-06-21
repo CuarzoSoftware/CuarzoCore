@@ -64,7 +64,7 @@ void SiO4::newMessage(QString name, QString data)
 {
     if(name == "RELAUNCHCRYSTALS")
 
-        QProcess::startDetached(QApplication::applicationDirPath() + "/../Crystals/Crystals");
+        QProcess::startDetached(crystals);
 
 }
 
