@@ -13,7 +13,8 @@ TEMPLATE = app
 
 SOURCES += \
         main.cpp \
-    sio4.cpp
+    sio4.cpp \
+    includes.cpp
 
 HEADERS += \
     includes.h \

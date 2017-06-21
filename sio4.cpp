@@ -12,7 +12,8 @@ SiO4::SiO4()
     setScaledContents(true);
 
     //Asigna la imagen del wallpaper
-    setPixmap(QPixmap(":/img/default.jpg"));
+    //Donde "wallpaper" es la variable definida en "Includes"
+    setPixmap(QPixmap(wallpaper));
 
     //Muestra el fondo en pantalla ( Podriamos añadir una animación más adelante )
     show();
@@ -35,10 +36,13 @@ void SiO4::startUI()
 {
 
     //Inicia Compton ( Display Manager )
-    QProcess::startDetached("compton -CG");
+    //Donde "compositor" es la variable declarada en "Includes"
+    QProcess::startDetached(compositor);
 
     //Inicia Crystals ( Window Manager )
-    QProcess::startDetached(QApplication::applicationDirPath() + "/../Crystals/Crystals");
+    //Donde "crystals" es la variable declarada en "Includes".
+    QProcess::startDetached(crystals);
+    //QProcess::startDetached(QApplication::applicationDirPath() + "/../Crystals/Crystals");
 }
 
 void SiO4::resolutionChanged()
