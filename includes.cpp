@@ -4,5 +4,5 @@
 // Todas las variables globales
 
 QString compositor = "compton -CG";
-QString crystals = "crystals";
-QString wallpaper = ":/img/wallpaper.jpg";
+QString crystals = QApplication::applicationDirPath() + "../Crystals/Crystals";
+QString wallpaper = ":/img/default.jpg";

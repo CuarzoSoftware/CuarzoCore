@@ -4,7 +4,10 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QLabel>
+#include <QList>
 #include <QProcess>
+#include <QTcpServer>
+#include <QTcpSocket>
 
 // Declaraciones globales
 QT_BEGIN_NAMESPACE
@@ -16,3 +19,6 @@ extern QString crystals;
 extern QString wallpaper;
 
 #endif // INCLUDES_H
+
+
+

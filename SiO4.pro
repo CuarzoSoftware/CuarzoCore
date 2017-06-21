@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,11 +14,13 @@ TEMPLATE = app
 SOURCES += \
         main.cpp \
     sio4.cpp \
-    includes.cpp
+    includes.cpp \
+    socket.cpp
 
 HEADERS += \
     includes.h \
-    sio4.h
+    sio4.h \
+    socket.h
 
 RESOURCES += \
     resources.qrc
