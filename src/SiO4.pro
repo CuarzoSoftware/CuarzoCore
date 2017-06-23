@@ -14,13 +14,11 @@ TEMPLATE = app
 SOURCES += \
     main.cpp \
     sio4.cpp \
-    includes.cpp \
-    socket.cpp
+    includes.cpp
 
 HEADERS += \
     includes.h \
-    sio4.h \
-    socket.h
+    sio4.h
 
 RESOURCES += \
     resources.qrc

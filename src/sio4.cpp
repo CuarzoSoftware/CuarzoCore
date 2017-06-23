@@ -5,7 +5,8 @@
 SiO4::SiO4()
 {
     //Inicia el servidor local
-    server->listen(QHostAddress("127.0.0.1"), 1996);
+    QLocalServer::removeServer("CuarzoServer");
+    server->listen("CuarzoServer");
     connect(server,SIGNAL(newConnection()),this,SLOT(newConnection()));
 
     //Usar pantalla completa
@@ -36,8 +37,11 @@ void SiO4::startUI()
 
     //Inicia Crystals ( Window Manager )
     //Donde "crystals" es la variable declarada en "Includes".
-    QProcess::startDetached(crystals);
-    //QProcess::startDetached(QApplication::applicationDirPath() + "/../Crystals/Crystals");
+    crystalsProcess->setProgram(crystals);
+    crystalsProcess->start();
+
+    //Inicia terminal ( Testeo )
+    QProcess::startDetached("gnome-terminal");
 }
 
 //Reajusta la resolucion de la pantalla
@@ -45,28 +49,68 @@ void SiO4::resolutionChanged()
 {
     QRect size = QApplication::desktop()->geometry();
     setGeometry(size);
-    foreach (Socket *client, sockets)
+    foreach (QLocalSocket *client, sockets)
     {
-       client->sendMessage("CHANGERESOLUTION",QString::number(size.width()) + "," + QString::number(size.height()));
+       sendMessage(client,"CHANGERESOLUTION",QString::number(size.width()) + "," + QString::number(size.height()));
     }
 }
 
 //Una nueva app se conecto
 void SiO4::newConnection()
 {
-    Socket *socket = (Socket*)server->nextPendingConnection();
-    connect(socket,SIGNAL(newMessage(QString,QString)),this,SLOT(newMessage(QString,QString)));
+    QLocalSocket *socket = server->nextPendingConnection();
+
+    //Lee los mensajes del cliente
+    connect(socket,&QLocalSocket::readyRead,this,[socket,this](){
+
+        //Obtiene el mensaje
+
+        QString fullMessage = QString::fromUtf8(socket->readAll());
+        QString key = fullMessage.mid(0,16);
+
+        //Filtra el mensaje
+
+        if(key != "CUARZOSOFTWARE16")
+            return;
+
+        //Limpia los mensajes
+
+        QString name = fullMessage.mid(16,32).replace("%","");
+        QString data = fullMessage.mid(48,128).replace("%","");
+
+        //Reinicia Crystals
+
+        if(name == "RELAUNCHCRYSTALS")
+        {
+            crystalsProcess->close();
+            crystalsProcess->start();
+        }
+
+    });
+
     sockets.append(socket);
 }
 
-//Nuevo mensaje de alguna app
-void SiO4::newMessage(QString name, QString data)
+
+//Envia un mensaje
+
+void SiO4::sendMessage(QLocalSocket *socket,QString name, QString data)
 {
-    if(name == "RELAUNCHCRYSTALS")
+    // ESTRUCTURA DEL MENSAJE ( NO USAR % )
+    // 16 bytes -> Llave Secreta
+    // 32 bytes -> Nombre del Mensaje
+    // 128 bytes -> Informacion
 
-        QProcess::startDetached(QApplication::applicationDirPath() + "/../Crystals/Crystals");
+    while(name.length()<32)
+        name.append("%");
 
+    while(data.length()<128)
+        data.append("%");
+
+    QString message = "CUARZOSOFTWARE16" + name + data;
+    socket->write(message.toUtf8());
 }
+
 
 //Destructor
 

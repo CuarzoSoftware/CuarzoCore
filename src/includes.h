@@ -6,8 +6,8 @@
 #include <QLabel>
 #include <QList>
 #include <QProcess>
-#include <QTcpServer>
-#include <QTcpSocket>
+#include <QLocalServer>
+#include <QLocalSocket>
 
 // Declaraciones globales
 QT_BEGIN_NAMESPACE
