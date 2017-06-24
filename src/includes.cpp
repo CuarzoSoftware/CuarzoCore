@@ -5,4 +5,4 @@
 
 QString compositor = "compton -CG";
 QString crystals = QApplication::applicationDirPath() + "../Crystals/Crystals";
-QString wallpaper = ":/img/default.jpg";
+QString wallpaper = ":/img/Wallpapers/5.jpg";

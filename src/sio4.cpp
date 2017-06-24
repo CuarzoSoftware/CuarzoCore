@@ -41,7 +41,7 @@ void SiO4::startUI()
     crystalsProcess->start();
 
     //Inicia terminal ( Testeo )
-    QProcess::startDetached("gnome-terminal");
+    QProcess::startDetached("xterm");
 }
 
 //Reajusta la resolucion de la pantalla

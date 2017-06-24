@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>img/default.jpg</file>
-        <file>img/wallpaper.jpg</file>
+        <file>img/Wallpapers/0.jpg</file>
+        <file>img/Wallpapers/5.jpg</file>
     </qresource>
 </RCC>

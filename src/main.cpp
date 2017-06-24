@@ -21,7 +21,19 @@ int main(int argc, char *argv[])
      * junto al resto de los programas de CuarzoOS.
     */
 
+    //Ajusta la densidad de pixeles
+    qputenv("QT_AUTO_SCREEN_SCALE_FACTOR","1");
+
     QApplication a(argc, argv);
+
+    //Identificador para QSettings
+    a.setOrganizationName("CuarzoSoftware");
+    a.setApplicationName("SiO4");
+
+    //Soporte para pantallas retina
+    a.setAttribute(Qt::AA_UseHighDpiPixmaps);
+    //a.setAttribute(Qt::AA_EnableHighDpiScaling);
+
     SiO4 core;
     return a.exec();
 }
